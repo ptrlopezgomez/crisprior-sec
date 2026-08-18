@@ -1,0 +1,12 @@
+{
+  "check_id": "CKV_AZURE_9",
+  "resource_name": "azurerm_network_security_group.example",
+  "static_severity": "high",
+  "context": {
+    "publicly_exposed": true,
+    "network_isolated": false,
+    "has_compensating_controls": false
+  },
+  "gold_contextual_severity": "critical",
+  "annotated_by": "panel_devsecops"
+}

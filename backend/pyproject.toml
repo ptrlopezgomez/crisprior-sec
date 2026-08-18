@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+addopts = "--cov=app --cov-report=term-missing"
+testpaths = ["tests"]
+
+[tool.coverage.report]
+fail_under = 80

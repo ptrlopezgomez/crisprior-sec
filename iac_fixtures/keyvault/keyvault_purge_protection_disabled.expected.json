@@ -1,0 +1,12 @@
+{
+  "check_id": "CKV_AZURE_110",
+  "resource_name": "azurerm_key_vault.example",
+  "static_severity": "medium",
+  "context": {
+    "publicly_exposed": false,
+    "network_isolated": false,
+    "has_compensating_controls": false
+  },
+  "gold_contextual_severity": "medium",
+  "annotated_by": "panel_devsecops"
+}

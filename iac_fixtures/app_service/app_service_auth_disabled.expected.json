@@ -1,0 +1,12 @@
+{
+  "check_id": "CKV_AZURE_13",
+  "resource_name": "azurerm_linux_web_app.no_auth_example",
+  "static_severity": "high",
+  "context": {
+    "publicly_exposed": true,
+    "network_isolated": false,
+    "has_compensating_controls": false
+  },
+  "gold_contextual_severity": "high",
+  "annotated_by": "panel_devsecops"
+}

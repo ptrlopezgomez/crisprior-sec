@@ -1,0 +1,12 @@
+{
+  "check_id": "CKV_AZURE_15",
+  "resource_name": "azurerm_linux_web_app.outdated_tls_example",
+  "static_severity": "medium",
+  "context": {
+    "publicly_exposed": false,
+    "network_isolated": false,
+    "has_compensating_controls": true
+  },
+  "gold_contextual_severity": "low",
+  "annotated_by": "panel_devsecops"
+}

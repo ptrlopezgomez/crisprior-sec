@@ -1,0 +1,12 @@
+{
+  "check_id": "CKV_AZURE_44",
+  "resource_name": "azurerm_storage_account.tls_example",
+  "static_severity": "medium",
+  "context": {
+    "publicly_exposed": false,
+    "network_isolated": true,
+    "has_compensating_controls": true
+  },
+  "gold_contextual_severity": "low",
+  "annotated_by": "panel_devsecops"
+}

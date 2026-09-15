@@ -136,17 +136,17 @@ def test_scan_degrades_gracefully_when_llm_unavailable(seeded_chromadb):
     assert len(ollama_warnings) == 1
 
 
-def test_scan_reports_warning_when_tfsec_unavailable(seeded_chromadb):
+def test_scan_reports_warning_when_trivy_unavailable(seeded_chromadb):
     tf_path = IAC_FIXTURES_DIR / "keyvault" / "keyvault_purge_protection_disabled.tf"
 
     with (
-        patch("app.api.routes.scan_with_tfsec", side_effect=RuntimeError("binario no encontrado")),
+        patch("app.api.routes.scan_with_trivy", side_effect=RuntimeError("binario no encontrado")),
         patch("app.api.routes.generate_explanation", return_value="explicación simulada"),
     ):
         _, payload = _scan([tf_path])
 
     assert payload["findings"]
-    assert any("tfsec no disponible" in warning for warning in payload["warnings"])
+    assert any("trivy no disponible" in warning for warning in payload["warnings"])
 
 
 def test_scan_falls_back_to_neutral_context_when_resource_not_resolved():

@@ -18,7 +18,7 @@ panel de expertos DevSecOps ("gold standard").
 
 ## Procedimiento
 
-1. Ejecutar Checkov y tfsec sobre `iac_fixtures/` para obtener el baseline estático.
+1. Ejecutar Checkov y trivy sobre `iac_fixtures/` para obtener el baseline estático.
 2. Ejecutar el motor de priorización contextual sobre el mismo conjunto.
 3. Comparar la severidad contextual calculada contra `gold_contextual_severity`
    de cada fixture.

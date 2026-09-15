@@ -7,7 +7,7 @@ import requests
 
 BACKEND_URL = "http://localhost:8000/api/v1"
 
-# El análisis invoca Checkov/tfsec y, por cada hallazgo, al LLM local
+# El análisis invoca Checkov/trivy y, por cada hallazgo, al LLM local
 # (Ollama); con varios hallazgos la respuesta puede tardar más que una
 # petición HTTP típica.
 _SCAN_TIMEOUT_SECONDS = 600

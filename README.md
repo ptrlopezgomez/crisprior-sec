@@ -1,6 +1,6 @@
 # Sistema Inteligente para Priorización Contextual de Riesgos de Seguridad en Infraestructura Cloud con Terraform
 
-Framework híbrido de segundo nivel que enriquece los hallazgos de analizadores estáticos de IaC (Checkov, tfsec) con análisis de contexto de red y explicaciones en lenguaje natural, para reducir la fatiga por alertas en flujos DevSecOps sobre Microsoft Azure.
+Framework híbrido de segundo nivel que enriquece los hallazgos de analizadores estáticos de IaC (Checkov, trivy) con análisis de contexto de red y explicaciones en lenguaje natural, para reducir la fatiga por alertas en flujos DevSecOps sobre Microsoft Azure.
 
 **Grupo 3012G** — Seminario de Innovación en Inteligencia Artificial, UNIR.
 
@@ -8,7 +8,7 @@ Framework híbrido de segundo nivel que enriquece los hallazgos de analizadores 
 
 - Proveedor: Microsoft Azure
 - Servicios cubiertos: Virtual Machines, Storage, Key Vault, App Service
-- Analizadores base: Checkov, tfsec
+- Analizadores base: Checkov, trivy
 - Motor de contexto: embeddings (Sentence Transformers) + ChromaDB
 - Generación de explicaciones: LLM local vía Ollama (Mistral-7B / Llama 3)
 
@@ -28,7 +28,7 @@ scripts/          Utilidades de setup y CI
 
 - Python 3.11+
 - [Ollama](https://ollama.com) instalado localmente con el modelo `mistral` descargado
-- Checkov y tfsec instalados (`pip install checkov`, ver [tfsec docs](https://aquasecurity.github.io/tfsec/))
+- Checkov y trivy instalados (`pip install checkov`, ver [trivy docs](https://trivy.dev/latest/getting-started/installation/))
 
 ## Puesta en marcha
 

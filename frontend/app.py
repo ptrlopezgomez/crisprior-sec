@@ -12,7 +12,7 @@ st.set_page_config(
 st.title("🛡️ Priorización Contextual de Riesgos de Seguridad en Terraform")
 st.markdown(
     """
-    Carga tus archivos Terraform (`.tf`) para obtener un baseline de Checkov/tfsec
+    Carga tus archivos Terraform (`.tf`) para obtener un baseline de Checkov/trivy
     reordenado según el contexto real de exposición de red y los controles
     compensatorios presentes, con explicaciones generadas por un LLM local.
 
@@ -25,7 +25,7 @@ uploaded_files = st.file_uploader(
 )
 
 if uploaded_files and st.button("Analizar", type="primary"):
-    progress_bar = st.progress(0.0, text="Ejecutando Checkov/tfsec...")
+    progress_bar = st.progress(0.0, text="Ejecutando Checkov/trivy...")
     status_text = st.empty()
 
     def _on_progress(event: dict) -> None:

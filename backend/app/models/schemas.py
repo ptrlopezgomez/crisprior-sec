@@ -17,7 +17,7 @@ class AzureResourceType(str, Enum):
 
 
 class StaticFinding(BaseModel):
-    """Hallazgo crudo devuelto por un analizador estático (Checkov / tfsec)."""
+    """Hallazgo crudo devuelto por un analizador estático (Checkov / trivy)."""
 
     check_id: str
     resource_type: str
@@ -25,7 +25,7 @@ class StaticFinding(BaseModel):
     file_path: str
     line_range: tuple[int, int]
     static_severity: Severity
-    source_tool: str = Field(description="checkov | tfsec")
+    source_tool: str = Field(description="checkov | trivy")
     description: str
 
 

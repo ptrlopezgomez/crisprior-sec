@@ -6,7 +6,7 @@
 
 1. El usuario carga su directorio Terraform en el frontend (Streamlit).
 2. El backend (FastAPI) extrae el AST de los archivos `.tf` y construye el grafo de red.
-3. Se ejecutan Checkov y tfsec para obtener el baseline de hallazgos.
+3. Se ejecutan Checkov y trivy para obtener el baseline de hallazgos.
 4. El motor de contexto (`app/engine`) enriquece cada hallazgo con variables
    operacionales (exposición pública, aislamiento de red, controles compensatorios).
 5. Se consulta la base vectorial (ChromaDB) para recuperar directrices relevantes
@@ -19,7 +19,7 @@
 | Componente | Responsabilidad | Ubicación |
 | --- | --- | --- |
 | API | Exponer endpoints REST | `backend/app/api` |
-| Scanners | Integración Checkov/tfsec | `backend/app/scanners` |
+| Scanners | Integración Checkov/trivy | `backend/app/scanners` |
 | Engine | Contexto de red + priorización | `backend/app/engine` |
 | LLM | Generación de explicaciones | `backend/app/llm` |
 | Dashboard | Interfaz de usuario | `frontend/` |

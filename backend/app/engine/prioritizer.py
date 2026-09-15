@@ -1,6 +1,6 @@
 """Motor de priorización contextual híbrido (HU-05).
 
-Recalcula la severidad estática de Checkov/tfsec combinando el hallazgo
+Recalcula la severidad estática de Checkov/trivy combinando el hallazgo
 con su contexto operacional (exposición de red, controles compensatorios)
 usando embeddings semánticos almacenados en ChromaDB.
 """

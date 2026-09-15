@@ -2,7 +2,7 @@
 
 Este directorio contiene los 50 archivos Terraform de prueba usados en el
 Capítulo 6 (Validación y Diseño Experimental) para medir la reducción de la
-fatiga por alertas frente al baseline de Checkov y tfsec.
+fatiga por alertas frente al baseline de Checkov y trivy.
 
 ## Convención
 

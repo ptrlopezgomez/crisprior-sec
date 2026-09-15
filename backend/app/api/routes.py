@@ -13,7 +13,7 @@ from app.engine.vector_store import query_relevant_guidelines
 from app.llm.ollama_client import generate_explanation
 from app.models.schemas import PrioritizedFinding, ResourceContext, ScanResponse, StaticFinding
 from app.scanners.checkov_wrapper import scan_with_checkov
-from app.scanners.tfsec_wrapper import scan_with_tfsec
+from app.scanners.trivy_wrapper import scan_with_trivy
 
 router = APIRouter()
 
@@ -28,7 +28,7 @@ async def scan_terraform(files: list[UploadFile]) -> StreamingResponse:
     """Recibe archivos .tf y analiza cada hallazgo (HU-01 a HU-05).
 
     La respuesta es NDJSON (una línea = un evento JSON), no un único JSON:
-    Checkov/tfsec y, sobre todo, el LLM local tardan varios segundos por
+    Checkov/trivy y, sobre todo, el LLM local tardan varios segundos por
     hallazgo, así que se emite un evento de progreso por cada uno en lugar
     de bloquear al cliente sin ninguna señal hasta el final. El último
     evento (`type: "result"`) trae el `ScanResponse` completo; un evento
@@ -69,7 +69,7 @@ def _event(event_type: str, **payload: Any) -> str:
 def _stream_pipeline(terraform_dir: Path, tmp_dir: tempfile.TemporaryDirectory) -> Iterator[str]:
     """Generador síncrono: Starlette itera un `StreamingResponse` no-async en
     un threadpool (`iterate_in_threadpool`), así que cada paso bloqueante
-    (Checkov, tfsec, ChromaDB, Ollama) libera el event loop de Uvicorn en
+    (Checkov, trivy, ChromaDB, Ollama) libera el event loop de Uvicorn en
     lugar de acapararlo, permitiendo que otras peticiones (p. ej. /health)
     se sigan atendiendo mientras este análisis corre en segundo plano.
     """
@@ -78,9 +78,9 @@ def _stream_pipeline(terraform_dir: Path, tmp_dir: tempfile.TemporaryDirectory) 
 
         baseline: list[StaticFinding] = scan_with_checkov(terraform_dir)
         try:
-            baseline.extend(scan_with_tfsec(terraform_dir))
+            baseline.extend(scan_with_trivy(terraform_dir))
         except RuntimeError as exc:
-            warnings.append(f"tfsec no disponible, baseline calculado solo con Checkov: {exc}")
+            warnings.append(f"trivy no disponible, baseline calculado solo con Checkov: {exc}")
 
         total = len(baseline)
         yield _event("start", total=total)
@@ -102,7 +102,7 @@ def _stream_pipeline(terraform_dir: Path, tmp_dir: tempfile.TemporaryDirectory) 
 
         prioritized.sort(key=lambda item: item.contextual_score, reverse=True)
 
-        # Los mensajes de degradación (tfsec/Ollama/ChromaDB no disponibles) se
+        # Los mensajes de degradación (trivy/Ollama/ChromaDB no disponibles) se
         # reportan una sola vez, no por cada hallazgo afectado.
         unique_warnings = list(dict.fromkeys(warnings))
         result = ScanResponse(findings=prioritized, warnings=unique_warnings)

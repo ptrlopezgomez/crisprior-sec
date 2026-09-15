@@ -1,4 +1,10 @@
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Directorio "backend/" (padre de "app/"), usado para anclar rutas por defecto
+# que de otro modo dependerían del cwd desde el que se lance el proceso.
+_BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 class Settings(BaseSettings):
@@ -7,7 +13,7 @@ class Settings(BaseSettings):
     app_name: str = "IaC Contextual Risk Prioritizer"
     api_v1_prefix: str = "/api/v1"
 
-    chromadb_path: str = "./chromadb/data"
+    chromadb_path: str = str(_BACKEND_DIR / "chromadb" / "data")
     chromadb_collection: str = "security_knowledge_base"
 
     ollama_host: str = "http://localhost:11434"

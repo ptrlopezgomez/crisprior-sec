@@ -14,9 +14,13 @@ class Settings(BaseSettings):
     ollama_model: str = "mistral"
 
     embeddings_model: str = "sentence-transformers/all-MiniLM-L6-v2"
+    guideline_retrieval_count: int = 3
 
     # Umbral de reducción de fatiga por alertas (Objetivo General del TFM)
     alert_fatigue_reduction_target: float = 0.30
+
+    # Validación de carga de archivos Terraform (HU-01)
+    max_upload_size_bytes: int = 10 * 1024 * 1024
 
 
 settings = Settings()

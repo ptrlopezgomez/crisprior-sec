@@ -46,3 +46,10 @@ class PrioritizedFinding(BaseModel):
     contextual_score: float = Field(ge=0, le=100)
     contextual_severity: Severity
     explanation: str
+
+
+class ScanResponse(BaseModel):
+    """Resultado del análisis de un directorio Terraform (HU-01, HU-05)."""
+
+    findings: list[PrioritizedFinding]
+    warnings: list[str] = Field(default_factory=list)

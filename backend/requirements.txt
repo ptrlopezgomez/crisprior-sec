@@ -1,9 +1,16 @@
 fastapi==0.115.0
+python-multipart==0.0.12
 uvicorn[standard]==0.30.6
 pydantic==2.9.2
 pydantic-settings==2.5.2
 checkov==3.2.257
+bc-python-hcl2==0.4.2
 chromadb==0.5.5
+# ChromaDB 0.5.5 llama a la API antigua de posthog.capture(distinct_id, event, ...);
+# posthog >=4 la cambió a keyword-only y rompe la telemetría interna de Chroma con
+# "capture() takes 1 positional argument but 3 were given" (no afecta la DB, pero
+# ensucia los logs). Se fija una versión compatible con esa firma.
+posthog==3.7.0
 sentence-transformers==3.1.1
 ollama==0.3.3
 python-dotenv==1.0.1
